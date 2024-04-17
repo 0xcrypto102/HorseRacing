@@ -23,8 +23,8 @@ pub enum HorseRaceError {
     #[msg("HorseRaceError: race not finished")]
     NotRaceFinished,
 
-    #[msg("HorseRaceError: Invalid player index")]
-    InvalidPlayerIndex,
+    #[msg("HorseRaceError: Invalid Horse index")]
+    InvalidHorseIndex,
 
     #[msg("HorseRaceError: Invalid race index")]
     InvalidRaceIndex,

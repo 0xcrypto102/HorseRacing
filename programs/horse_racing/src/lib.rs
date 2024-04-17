@@ -7,7 +7,7 @@ mod constants;
 use anchor_lang::prelude::*;
 use instructions::*;
 
-declare_id!("HNHJincv6PXfKGu6itbsbPnPgeEDPxCfa82otQ6iyifk");
+declare_id!("5K2BWPPHRjjvBjh5gt5PAh6v4PrMNRuQK3dEULoW2VkP");
 
 #[program]
 pub mod horse_racing {

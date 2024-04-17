@@ -84,8 +84,8 @@ pub fn bet_race(ctx: Context<BetRace>, race_index: u32, player_index: u16, horse
         return Err(HorseRaceError::RaceFinished.into());
     }
 
-    if player_index != 1 && player_index != 2 && player_index != 3 && player_index != 4 && player_index != 5 {
-        return Err(HorseRaceError::InvalidPlayerIndex.into());
+    if horse_id != 1 && horse_id != 2 && horse_id != 3 && horse_id != 4 && horse_id != 5 {
+        return Err(HorseRaceError::InvalidHorseIndex.into());
     }
 
     // bet amout to horse
@@ -122,24 +122,24 @@ pub fn bet_race(ctx: Context<BetRace>, race_index: u32, player_index: u16, horse
     accts.user_race_info.claimed = false;
 
     //  update the race info
-    match player_index {
-        1_u16 => {
+    match horse_id {
+        1_u8 => {
             accts.race.horse1_players += 1;
             accts.race.horse1_bet_amount += transfer_amount;
         },
-        2_u16 => {
+        2_u8 => {
             accts.race.horse2_players += 1;
             accts.race.horse2_bet_amount += transfer_amount;
         },
-        3_u16 => {
+        3_u8 => {
             accts.race.horse3_players += 1;
             accts.race.horse3_bet_amount += transfer_amount;
         },
-        4_u16 => {
+        4_u8 => {
             accts.race.horse4_players += 1;
             accts.race.horse4_bet_amount += transfer_amount;
         },
-        5_u16 => {
+        5_u8 => {
             accts.race.horse5_players += 1;
             accts.race.horse5_bet_amount += transfer_amount;
         },
@@ -203,7 +203,7 @@ pub fn finish_race(ctx: Context<FinishRace>, race_index: u32) -> Result<()> {
     let account = Randomness::try_deserialize(&mut &accts.random.data.borrow()[..])?;
 
     if let Some(randomness) = account.fulfilled() {
-        let rand = get_vaule(randomness);
+        let rand = randomness[0] % 5;
 
         match rand {
             0_u8 => {
@@ -271,7 +271,7 @@ pub fn claim_reward(ctx: Context<ClaimReward>, race_index: u32, player_index: u1
         return Err(HorseRaceError::InvalidRaceIndex.into());
     }
 
-    if u16::from(accts.race.winner)  != accts.user_race_info.player_index {
+    if u16::from(accts.race.winner)  != accts.user_race_info.horse_id.into() {
         return Err(HorseRaceError::NotWinner.into());
     }
 
@@ -336,16 +336,10 @@ pub fn claim_reward(ctx: Context<ClaimReward>, race_index: u32, player_index: u1
     }
 
     accts.race.status = 3;
+    accts.user_race_info.claimed = true;
 
     Ok(())
 }
-
-fn get_vaule(randomness: &[u8; 64]) -> u8 {
-    // use only first 8 bytes for simplicyty
-    let value = randomness[0..size_of::<u64>()].try_into().unwrap();
-    (u64::from_le_bytes(value) % 5).try_into().unwrap()
-}
-
 
 #[derive(Accounts)]
 pub struct Initialize<'info> {
@@ -404,7 +398,7 @@ pub struct CreateRace<'info> {
 }
 
 #[derive(Accounts)]
-#[instruction(race_index: u32, player_index: u32)]
+#[instruction(race_index: u32, player_index: u16)]
 pub struct BetRace<'info> {
     #[account(mut)]
     pub user: Signer<'info>,
@@ -541,7 +535,7 @@ pub struct FinishRace<'info> {
 }
 
 #[derive(Accounts)]
-#[instruction(race_index: u32, player_index: u32)]
+#[instruction(race_index: u32, player_index: u16)]
 pub struct ClaimReward<'info> {
     #[account(mut)]
     pub owner: Signer<'info>,
