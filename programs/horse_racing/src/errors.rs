@@ -36,5 +36,8 @@ pub enum HorseRaceError {
     NotRaceInProgress,
 
     #[msg("HorseRaceError: Not winner")]
-    NotWinner
+    NotWinner,
+
+    #[msg("HorseRaceError: Winner changes not valid")]
+    WinnerChangeNotValid
 }

@@ -28,7 +28,7 @@ pub fn initialize(ctx: Context<Initialize>, fee: u64) -> Result<()> {
     Ok(())
 }
 
-pub fn create_race(ctx: Context<CreateRace>,race_index: u32) -> Result<()> {
+pub fn create_race(ctx: Context<CreateRace>,race_index: u32, horse1_chance: u32, horse2_chance: u32, horse3_chance: u32, horse4_chance: u32, horse5_chance: u32) -> Result<()> {
     let accts = ctx.accounts;
 
     if accts.global_state.owner != accts.owner.key() {
@@ -39,6 +39,11 @@ pub fn create_race(ctx: Context<CreateRace>,race_index: u32) -> Result<()> {
         return Err(HorseRaceError::NotValidRaceIndex.into());
     }
 
+    if horse1_chance + horse2_chance + horse3_chance + horse4_chance + horse5_chance !=100 {
+        return Err(HorseRaceError::WinnerChangeNotValid.into());
+    }
+
+
     // update the total race in the global state 
     accts.global_state.total_race = race_index;
 
@@ -48,18 +53,23 @@ pub fn create_race(ctx: Context<CreateRace>,race_index: u32) -> Result<()> {
     accts.race.players = 0;
     accts.race.bet_amount = 0;
 
+    accts.race.horse1_chance = horse1_chance;
     accts.race.horse1_players = 0;
     accts.race.horse1_bet_amount = 0;
 
+    accts.race.horse2_chance = horse2_chance;
     accts.race.horse2_players = 0;
     accts.race.horse2_bet_amount = 0;
 
+    accts.race.horse3_chance = horse3_chance;
     accts.race.horse3_players = 0;
     accts.race.horse3_bet_amount = 0;
 
+    accts.race.horse4_chance = horse4_chance;
     accts.race.horse4_players = 0;
     accts.race.horse4_bet_amount = 0;
 
+    accts.race.horse5_chance = horse5_chance;
     accts.race.horse5_players = 0;
     accts.race.horse5_bet_amount = 0;
 
@@ -154,7 +164,7 @@ pub fn bet_race(ctx: Context<BetRace>, race_index: u32, player_index: u16, horse
     Ok(())
 }
 
-pub fn start_race(ctx: Context<StartRace>, race_index: u32, force: [u8; 32]) -> Result<()> {
+pub fn start_race(ctx: Context<StartRace>, race_index: u32, force: [u8; 32],) -> Result<()> {
     let accts = ctx.accounts;
 
     if accts.global_state.owner != accts.owner.key() {
@@ -203,32 +213,29 @@ pub fn finish_race(ctx: Context<FinishRace>, race_index: u32) -> Result<()> {
     let account = Randomness::try_deserialize(&mut &accts.random.data.borrow()[..])?;
 
     if let Some(randomness) = account.fulfilled() {
-        let rand = randomness[0] % 5;
+        let rand: u32 = (randomness[0] as u32 * 100 / 255 ) % 100;
 
-        match rand {
-            0_u8 => {
-                accts.race.reward_amount = accts.race.bet_amount - accts.race.horse1_bet_amount;
-                accts.race.winner = 1;
-            },
-            1_u8 => {
-                accts.race.reward_amount = accts.race.bet_amount - accts.race.horse2_bet_amount;
-                accts.race.winner = 2;
-            },
-            2_u8 => {
-                accts.race.reward_amount = accts.race.bet_amount - accts.race.horse3_bet_amount;
-                accts.race.winner = 3;
-            },
-            3_u8 => {
-                accts.race.reward_amount = accts.race.bet_amount - accts.race.horse4_bet_amount;
-                accts.race.winner = 4;
-            },
-            4_u8 => {
-                accts.race.reward_amount = accts.race.bet_amount - accts.race.horse5_bet_amount;
-                accts.race.winner = 5;
-            },
-            _ => {
-               
-            },
+        let chance1 = accts.race.horse1_chance;
+        let chance2 = chance1.clone() + accts.race.horse2_chance;
+        let chance3 = chance2.clone() + accts.race.horse3_chance;
+        let chance4 = chance3.clone() + accts.race.horse4_chance;
+        let chance5 = chance4.clone() + accts.race.horse5_chance;
+
+        if rand <= chance1 {
+            accts.race.reward_amount = accts.race.bet_amount - accts.race.horse1_bet_amount;
+            accts.race.winner = 1;
+        } else if rand <= chance2 {
+            accts.race.reward_amount = accts.race.bet_amount - accts.race.horse2_bet_amount;
+            accts.race.winner = 2;
+        } else if rand <= chance3 {
+            accts.race.reward_amount = accts.race.bet_amount - accts.race.horse3_bet_amount;
+            accts.race.winner = 3;
+        } else if rand <= chance4 {
+            accts.race.reward_amount = accts.race.bet_amount - accts.race.horse4_bet_amount;
+            accts.race.winner = 4;
+        } else if rand <= chance5 {
+            accts.race.reward_amount = accts.race.bet_amount - accts.race.horse5_bet_amount;
+            accts.race.winner = 5;
         }
     }
 

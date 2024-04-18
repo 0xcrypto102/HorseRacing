@@ -86,6 +86,13 @@ describe("horse_racing", () => {
     const globalStateData = await program.account.globalState.fetch(globalState);
     const raceIndex = globalStateData.totalRace + 1;
 
+    const horse1Chance = 15;
+    const horse2Chance = 20;
+    const horse3Chance = 20;
+    const horse4Chance = 28;
+    const horse5Chance = 17;
+
+
     const [race, _] = await anchor.web3.PublicKey.findProgramAddress(
       [
         Buffer.from(RACE_SEED),
@@ -95,6 +102,11 @@ describe("horse_racing", () => {
     );
     const tx = await program.rpc.createRace(
       raceIndex,
+      horse1Chance,
+      horse2Chance,
+      horse3Chance,
+      horse4Chance,
+      horse5Chance,
       {
         accounts: {
           owner: owner.publicKey,
@@ -226,7 +238,7 @@ describe("horse_racing", () => {
  }); 
  
   it("finish race", async() => {
-    const raceIndex =3;
+    const raceIndex = 1;
     let tokenOwnerAccountForFee = await getAssociatedTokenAddress(
       tokenMint,
       owner.publicKey
@@ -271,7 +283,7 @@ describe("horse_racing", () => {
   
   
   it("claim reward", async() => {
-    const raceIndex = 3;
+    const raceIndex = 1;
     const playerIndex = 1;
 
     const [race, _] = await anchor.web3.PublicKey.findProgramAddress(

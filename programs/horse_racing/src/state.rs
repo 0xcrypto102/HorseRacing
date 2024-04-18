@@ -16,14 +16,19 @@ pub struct Race {
     pub race_id: u32, // index of race
     pub players: u16, // total players take part in race
     pub bet_amount: u64, // total bet amount in race
+    pub horse1_chance: u32, // winner percentage
     pub horse1_players: u16, // players to bet in first horse
     pub horse1_bet_amount: u64, // total bet amount of first horse
+    pub horse2_chance: u32, // winner percentage
     pub horse2_players: u16, // players to bet in second horse
     pub horse2_bet_amount: u64, // total bet amount of second horse
+    pub horse3_chance: u32, // winner percentage
     pub horse3_players: u16, // players to bet in third horse
     pub horse3_bet_amount: u64, // total bet amount of third horse
+    pub horse4_chance: u32, // winner percentage
     pub horse4_players: u16, // players to bet in fourth horse
     pub horse4_bet_amount: u64, // total bet amount of fourth horse
+    pub horse5_chance: u32, // winner percentage
     pub horse5_players: u16, // players to bet in fiveth horse
     pub horse5_bet_amount: u64, // total bet amount of fiveth horse
     pub force: [u8; 32],
