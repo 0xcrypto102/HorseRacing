@@ -14,7 +14,7 @@ const Header = () => {
           href="/"
           className="flex flex-row lg:gap-8 gap-4 items-center"
         >
-          <img src="/images/logo.png" alt="My Image" className="object-contain w-18 h-18"/>
+          <img src="/images/logo.png" alt="Horse logo image" className="object-contain w-18 h-18"/>
           <div className="flex flex-col">
             <div className="font-main-title font-normal text-5xl tracking-wider">
               HORSE
