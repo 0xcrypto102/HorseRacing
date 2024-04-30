@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
         <button className="p-2 rounded-full border border-white bg-[#201b1a] bg-opacity-40 border-opacity-20 hover:bg-opacity-40 w-14 h-14 flex justify-center items-center">
           <Icon icon="basil:telegram-solid" className="w-7 h-7" />
         </button>
-        <button className="p-2 rounded-full border border-white bg-[# ] bg-opacity-40 border-opacity-20 hover:bg-opacity-40 w-14 h-14 flex justify-center items-center">
+        <button className="p-2 rounded-full border border-white bg-[#201b1a] bg-opacity-40 border-opacity-20 hover:bg-opacity-40 w-14 h-14 flex justify-center items-center">
           <DexScreenSvg />
         </button>
       </div>

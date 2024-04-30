@@ -10,7 +10,10 @@ const Header = () => {
   return (
     <div className="h-[90px] lg:mt-2 mt-0 lg:px-[50px] px-4 justify-between p-4 border-b border-b-white w-full border-opacity-40 flex flex-row items-center">
       <div className="flex flex-row items-center gap-14">
-        <div className="flex flex-row lg:gap-8 gap-4 items-center">
+        <Link
+          href="/"
+          className="flex flex-row lg:gap-8 gap-4 items-center"
+        >
           <img src="/images/logo.png" alt="My Image" className="object-contain w-18 h-18"/>
           <div className="flex flex-col">
             <div className="font-main-title font-normal text-5xl tracking-wider">
@@ -18,7 +21,7 @@ const Header = () => {
             </div>
             <div className=" tracking-[9px] -mt-2">RACING</div>
           </div>
-        </div>
+        </Link>
         <div className="flex flex-row font-semibold">
           <div className="hidden lg:flex gap-8">
             <Link
