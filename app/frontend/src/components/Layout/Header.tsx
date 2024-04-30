@@ -2,11 +2,17 @@
 import Image from "next/image";
 import LaunchIcon from "./LaunchIcon";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 const Header = () => {
   const pathname = usePathname();
+  const router = useRouter();
+  
+  const handleClick = () => {
+    router.push('/launchapp');
+  }
+
   return (
     <div className="h-[90px] lg:mt-2 mt-0 lg:px-[50px] px-4 justify-between p-4 border-b border-b-white w-full border-opacity-40 flex flex-row items-center">
       <div className="flex flex-row items-center gap-14">
@@ -58,7 +64,7 @@ const Header = () => {
         </div>
       </div>
       <div className="">
-        <button className=" bg-primary text-secondary font-bold rounded-lg p-4 relative flex-row items-center gap-2 hidden lg:flex">
+        <button className=" bg-primary text-secondary font-bold rounded-lg p-4 relative flex-row items-center gap-2 hidden lg:flex" onClick={handleClick}>
           LAUNCH APP <LaunchIcon />
           <div className="absolute top-0 left-1/2 transform -translate-x-1/2 border-b-8 border-b-primary border-l-8 border-l-transparent border-r-8 border-r-transparent -mt-2"></div>
           <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 border-t-8 border-t-primary border-l-8 border-l-transparent border-r-8 border-r-transparent -mb-2"></div>

@@ -23,7 +23,7 @@ export default function Home() {
             <div className="flex flex-col text-center">
               <div className=" text-primary">STEP-03</div>
               <div className=" font-main-title text-3xl">Find a Reliable Exchange</div>
-              <div className="mt-4">Once you have cryptocurrency in your wallet, you'll need to find a reliable exchange that lists the token you want to buy.</div>
+              <div className="mt-4">{"Once you have cryptocurrency in your wallet, you'll need to find a reliable exchange that lists the token you want to buy."}</div>
             </div>
           </div>
         </div>
@@ -52,7 +52,7 @@ export default function Home() {
               <img src="/images/fi_2228899.png" className="w-10" />
             </div>
             <div className="flex flex-col text-center">
-              <div className=" text-primary">STEP-04</div>
+              <div className=" text-primary">{"STEP-04"}</div>
               <div className=" font-main-title text-3xl">Purchase the Token</div>
               <div className="mt-4">{"After selecting the exchange, navigate to the trading section and locate the trading pair for the token you want to buy (SPL Token)."}</div>
             </div>
@@ -92,7 +92,7 @@ export default function Home() {
             <div className="flex flex-col text-center">
               <div className=" text-primary">STEP-03</div>
               <div className=" font-main-title text-3xl">Find a Reliable Exchange</div>
-              <div className="mt-4">Once you have cryptocurrency in your wallet, you'll need to find a reliable exchange that lists the token you want to buy.</div>
+              <div className="mt-4">{"Once you have cryptocurrency in your wallet, you'll need to find a reliable exchange that lists the token you want to buy."}</div>
             </div>
             <div className="border-4 border-[#F45C12] rounded-full w-4 h-4 bg-primary absolute -bottom-2 z-20 min-[500px]:left-[214px] left-[133px]"></div>
             <div className="border border-dashed border-secondary h-28 -bottom-28 z-10 absolute min-[500px]:left-[221px] left-[140px]"></div>
