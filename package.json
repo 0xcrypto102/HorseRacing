@@ -5,9 +5,11 @@
     },
     "dependencies": {
         "@coral-xyz/anchor": "^0.29.0",
+        "@iconify/react": "^4.1.1",
         "@orao-network/solana-vrf": "^0.2.7-O",
         "@solana/spl-token": "^0.4.3",
-        "@solana/web3.js": "^1.91.6"
+        "@solana/web3.js": "^1.91.6",
+        "react-toastify": "^10.0.5"
     },
     "devDependencies": {
         "@types/bn.js": "^5.1.0",
