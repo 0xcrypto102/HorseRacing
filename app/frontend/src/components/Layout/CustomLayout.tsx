@@ -10,7 +10,7 @@ const CustomLayout = ({ children }: { children: React.ReactNode }) => {
   const bgUrl = pathname === "/" ? "url('/images/background.png')" : "url('/images/background1.png')";
 
   return (
-    <main className="fixed w-screen h-screen">
+    <main className="fixed w-screen h-screen text-white">
       <div
         className="flex flex-col h-full bg-no-repeat bg-cover bg-center bg-fixed justify-between"
         style={{ backgroundImage: bgUrl }}
