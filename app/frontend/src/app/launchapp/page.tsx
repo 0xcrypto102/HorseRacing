@@ -126,8 +126,7 @@ export default function Home() {
                 <div className=" text-xs"> John</div>
               </div>
               <div className="flex flex-row bg-white w-fit text-secondary rounded-md p-2 text-xs absolute right-10">
-                Right? I couldn't believe how Horse Whisperer came from behind
-                to take the lead.
+                {"Right? I couldn't believe how Horse Whisperer came from behind to take the lead."}
               </div>
             </div>
 
@@ -148,8 +147,7 @@ export default function Home() {
                 <div className=" text-xs"> John</div>
               </div>
               <div className="flex flex-row bg-white w-fit text-secondary rounded-md p-2 text-xs absolute right-10">
-                Right? I couldn't believe how Horse Whisperer came from behind
-                to take the lead.
+                {"Right? I couldn't believe how Horse Whisperer came from behind to take the lead."}
               </div>
             </div>
           </div>
