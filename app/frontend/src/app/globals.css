@@ -26,6 +26,21 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+  
+/* For Firefox */
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
